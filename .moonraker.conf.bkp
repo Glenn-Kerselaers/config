@@ -57,6 +57,11 @@ cors_domains =
 	*.lan
 	*://app.fluidd.xyz
 	*://my.mainsail.xyz
+	*://192.168.0.197
+	*://192.168.0.102
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
 force_logins = False
 
 [zeroconf]
