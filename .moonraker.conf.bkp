@@ -102,6 +102,11 @@ requirements = scripts/KlipperScreen-requirements.txt
 install_script = scripts/KlipperScreen-install.sh
 managed_services = KlipperScreen
 
+[update_manager CanBoot]
+type = git_repo
+origin = https://github.com/Arksine/CanBoot.git
+path = ~/CanBoot
+
 [update_manager client z_calibration]
 type = git_repo
 path = ~/klipper_z_calibration
