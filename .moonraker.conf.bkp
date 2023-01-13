@@ -106,6 +106,7 @@ managed_services = KlipperScreen
 type = git_repo
 origin = https://github.com/Arksine/CanBoot.git
 path = ~/CanBoot
+is_system_service = False
 
 [update_manager client z_calibration]
 type = git_repo
