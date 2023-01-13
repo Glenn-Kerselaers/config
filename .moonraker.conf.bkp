@@ -22,7 +22,7 @@ body = {event_message}
 attach = http://192.168.0.197/webcam/?action=snapshot
 
 [server]
-host = 0.0.0.0
+host = all
 port = 7125
 klippy_uds_address = /home/pi/printer_data/comms/klippy.sock
 max_upload_size = 1024
@@ -56,9 +56,8 @@ cors_domains =
 	*.local
 	*.lan
 	*://app.fluidd.xyz
-	*://my.mainsail.xyz
-	*://192.168.0.197
-	*://192.168.0.102
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
 	http://*.local
 force_logins = False
 
