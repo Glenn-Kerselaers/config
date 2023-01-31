@@ -1,26 +1,3 @@
-[notifier print_start]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = started
-body = Your printer started printing '{event_args[1].filename}'
-
-[notifier print_complete]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = complete
-body = Your printer completed printing '{event_args[1].filename}'
-attach = http://192.168.0.102/webcam/?action=snapshot
-
-[notifier print_error]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = error
-body = {event_args[1].message}
-attach = http://192.168.0.102/webcam/?action=snapshot
-
-[notifier my_telegram_notifier]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = gcode
-body = {event_message}
-attach = http://192.168.0.102/webcam/?action=snapshot
-
 [server]
 host = 0.0.0.0
 port = 7125
@@ -107,17 +84,4 @@ type = git_repo
 path = ~/crowsnest
 origin = https://github.com/mainsail-crew/crowsnest.git
 install_script = tools/install.sh
-
-[update_manager fluidd]
-type = web
-channel = stable
-repo = fluidd-core/fluidd
-path = ~/fluidd
-
-[update_manager client z_calibration]
-type = git_repo
-path = ~/klipper_z_calibration
-origin = https://github.com/protoloft/klipper_z_calibration.git
-install_script = install.sh
-managed_services = klipper
 

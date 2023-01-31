@@ -4,8 +4,10 @@
 gcode:
 	{% set BED_TEMP = params.BED|float %}
 	{% set EXTRUDER_TEMP = params.EXTRUDER|float %}
-	{% set DWELL_TIME = params.DWELL|int %}
+	#{% set DWELL_TIME = params.DWELL|int %}
 	{% set CHAMBER_TEMP = params.CHAMBER|float %}
+    {% set X_WAIT = printer.toolhead.axis_maximum.x|float / 2 %}
+    {% set Y_WAIT = printer.toolhead.axis_maximum.y|float / 2 %}
 
 	M220 S100 ; reset feedrate
 	G21 ; set units to millimeters
@@ -22,17 +24,37 @@ gcode:
 	Attach_Probe_Lock
 	G28 Z
 
-	PREHEAT BED={BED_TEMP} DWELL={DWELL_TIME} 
+    {% if params.BED|float > 90 %}
+      _UserDebug msg="Bed: {BED_TEMP}c"
+      STATUS_HEATING
+      M106 S255
+      G1 X{X_WAIT} Y{Y_WAIT} Z30 F9000
+      M190 S{BED_TEMP}
+      _UserDebug msg="Heatsoak: {CHAMBER_TEMP}c"
+      TEMPERATURE_WAIT SENSOR="temperature_sensor Chamber" MINIMUM={CHAMBER_TEMP}
+    {% else %}
+      _UserDebug msg="Bed: {BED_TEMP}c"
+      STATUS_HEATING
+      G1 X{X_WAIT} Y{Y_WAIT} Z30 F9000
+      M190 S{BED_TEMP}
+      _UserDebug msg="Soak for 5min"
+      G4 P300000
+      G28 Z
+    {% endif %}
+    _UserDebug msg="Hotend: 150c"
+    M109 S150
+    _UserDebug msg="Bed mesh"
+    STATUS_MESHING
+    BED_MESH_CALIBRATE
+    _UserDebug msg="Hotend: {EXTRUDER_TEMP}c"  
+    STATUS_HEATING
+    G1 X{X_WAIT} Y{Y_WAIT} Z30 F9000 
+    M107
+    M109 S{EXTRUDER_TEMP}
+    PRIME_LINE EXTRUDER_TEMP={EXTRUDER_TEMP} XPAD=0 YPAD=0 LENGTH=50 PRINT_SPEED=30 TRAVEL_SPEED=200 PURGE=8 RETRACT=0.75 EXTRUSION_MULTIPLIER=1.25 PRINT_HANDLE=0 HANDLE_FAN=35 AREA_START="15,15"
+    _UserDebug msg="Printer goes brr"
+    STATUS_PRINTING
 
-	G28 Z
-	M104 S200
-	BED_MESH_CALIBRATE
-	Dock_Probe_Unlock
-
-	status_heating
-	M109 S{EXTRUDER_TEMP}
-	PRIME_LINE EXTRUDER_TEMP={EXTRUDER_TEMP} XPAD=0 YPAD=0 LENGTH=50 PRINT_SPEED=30 TRAVEL_SPEED=200 PURGE=8 RETRACT=0.75 EXTRUSION_MULTIPLIER=1.25 PRINT_HANDLE=0 HANDLE_FAN=35 AREA_START="15,15"
-	STATUS_PRINTING
 
 [gcode_macro PRINT_END]
 gcode:
@@ -50,6 +72,7 @@ gcode:
 	BED_MESH_CLEAR							
 	RESETSPEEDS
 	status_part_ready
+    _CLEAR_DISPLAY
 
 # VintageGriffin's automatic prime line macro
 [gcode_macro PRIME_LINE]
