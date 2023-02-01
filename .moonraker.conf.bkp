@@ -22,7 +22,7 @@ body = {event_message}
 attach = http://192.168.0.197/webcam/?action=snapshot
 
 [server]
-host = all
+host = 0.0.0.0
 port = 7125
 klippy_uds_address = /home/pi/printer_data/comms/klippy.sock
 max_upload_size = 1024
@@ -43,6 +43,7 @@ load_on_startup = False
 [authorization]
 trusted_clients = 
 	127.0.0.1
+	192.168.0.145
 	192.168.0.0/24
 	10.0.0.0/8
 	127.0.0.0/8
@@ -59,7 +60,7 @@ cors_domains =
 	https://my.mainsail.xyz
 	http://my.mainsail.xyz
 	http://*.local
-force_logins = False
+force_logins = false
 
 [zeroconf]
 
@@ -70,6 +71,7 @@ force_logins = False
 [announcements]
 subscriptions = 
 	mainsail
+	fluidd
 
 [update_manager]
 refresh_interval = 12
@@ -137,4 +139,10 @@ path = ~/ERCF-Software-V3
 origin = https://github.com/moggieuk/ERCF-Software-V3.git
 install_script = install.sh
 managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
 
