@@ -57,8 +57,7 @@ cors_domains =
 	*.local
 	*.lan
 	*://app.fluidd.xyz
-	https://my.mainsail.xyz
-	http://my.mainsail.xyz
+	*://my.mainsail.xyz
 	http://*.local
 force_logins = false
 
@@ -132,6 +131,7 @@ type = git_repo
 path = ~/crowsnest
 origin = https://github.com/mainsail-crew/crowsnest.git
 install_script = tools/install.sh
+managed_services = crowsnest
 
 [update_manager ercf-happy_hare]
 type = git_repo
@@ -145,4 +145,11 @@ type = web
 channel = stable
 repo = fluidd-core/fluidd
 path = ~/fluidd
+
+[update_manager voron-klipper-extensions]
+type = git_repo
+path = ~/voron-klipper-extensions
+origin = https://github.com/voidtrance/voron-klipper-extensions.git
+install_script = install-extensions.sh
+managed_services = klipper
 
