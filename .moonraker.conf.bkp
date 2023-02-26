@@ -1,26 +1,3 @@
-[notifier print_start]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = started
-body = Your printer started printing '{event_args[1].filename}'
-
-[notifier print_complete]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = complete
-body = Your printer completed printing '{event_args[1].filename}'
-attach = http://192.168.0.197/webcam/?action=snapshot
-
-[notifier print_error]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = error
-body = {event_args[1].message}
-attach = http://192.168.0.197/webcam/?action=snapshot
-
-[notifier my_telegram_notifier]
-url = tgram://{secrets.notifier_telegram.bottoken}/{secrets.notifier_telegram.chatid}
-events = gcode
-body = {event_message}
-attach = http://192.168.0.197/webcam/?action=snapshot
-
 [server]
 host = 0.0.0.0
 port = 7125
@@ -59,6 +36,7 @@ cors_domains =
 	*://app.fluidd.xyz
 	*://my.mainsail.xyz
 	http://*.local
+	http://app.fluidd.xyz
 force_logins = false
 
 [zeroconf]
@@ -133,13 +111,6 @@ origin = https://github.com/mainsail-crew/crowsnest.git
 install_script = tools/install.sh
 managed_services = crowsnest
 
-[update_manager ercf-happy_hare]
-type = git_repo
-path = ~/ERCF-Software-V3
-origin = https://github.com/moggieuk/ERCF-Software-V3.git
-install_script = install.sh
-managed_services = klipper
-
 [update_manager fluidd]
 type = web
 channel = stable
@@ -160,4 +131,11 @@ origin = https://github.com/nlef/moonraker-telegram-bot.git
 env = ~/moonraker-telegram-bot-env/bin/python
 requirements = scripts/requirements.txt
 install_script = scripts/install.sh
+
+[update_manager ercf-happy_hare]
+type = git_repo
+path = ~/ERCF-Software-V3
+origin = https://github.com/moggieuk/ERCF-Software-V3.git
+install_script = install.sh
+managed_services = klipper
 
