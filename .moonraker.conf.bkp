@@ -36,7 +36,6 @@ cors_domains =
 	*://app.fluidd.xyz
 	*://my.mainsail.xyz
 	http://*.local
-	http://app.fluidd.xyz
 force_logins = false
 
 [zeroconf]
