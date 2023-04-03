@@ -46,8 +46,7 @@ force_logins = false
 
 [announcements]
 subscriptions = 
-	mainsail
-	fluidd
+	octoeverywhere
 
 [update_manager]
 refresh_interval = 12
@@ -116,13 +115,6 @@ channel = stable
 repo = fluidd-core/fluidd
 path = ~/fluidd
 
-[update_manager voron-klipper-extensions]
-type = git_repo
-path = ~/voron-klipper-extensions
-origin = https://github.com/voidtrance/voron-klipper-extensions.git
-install_script = install-extensions.sh
-managed_services = klipper
-
 [update_manager moonraker-telegram-bot]
 type = git_repo
 path = ~/moonraker-telegram-bot
@@ -145,4 +137,15 @@ path = ~/Klipper-Adaptive-Meshing-Purging
 origin = https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
 managed_services = klipper
 primary_branch = main
+
+[update_manager octoeverywhere]
+type = git_repo
+channel = beta
+path = /home/pi/octoeverywhere
+origin = https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git
+env = /home/pi/octoeverywhere-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	octoeverywhere
 
