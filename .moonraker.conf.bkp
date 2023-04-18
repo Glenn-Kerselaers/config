@@ -71,6 +71,7 @@ path = ~/sonar
 origin = https://github.com/mainsail-crew/sonar.git
 primary_branch = main
 managed_services = sonar
+install_script = tools/install.sh
 
 [update_manager crowsnest]
 type = git_repo
@@ -88,4 +89,21 @@ requirements = requirements.txt
 install_script = install.sh
 managed_services = 
 	octoeverywhere
+
+[update_manager mobileraker]
+type = git_repo
+path = ~/mobileraker_companion
+origin = https://github.com/Clon1998/mobileraker_companion.git
+primary_branch = main
+managed_services = mobileraker
+env = ~/mobileraker-env/bin/python
+requirements = scripts/mobileraker-requirements.txt
+install_script = scripts/install-mobileraker-companion.sh
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
 
