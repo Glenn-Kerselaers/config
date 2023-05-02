@@ -37,6 +37,9 @@ queue_gcode_uploads = True
 temperature_store_size = 2400
 gcode_store_size = 2000
 
+[machine]
+sudo_password = {secrets.machine_moonraker.password}
+
 [job_queue]
 load_on_startup = True
 
