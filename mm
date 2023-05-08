@@ -109,10 +109,11 @@ primary_branch: main
 managed_services: sonar
 install_script: tools/install.sh
 
-[update_manager z_calibration]
+[update_manager client z_calibration]
 type: git_repo
 path: ~/klipper_z_calibration
 origin: https://github.com/protoloft/klipper_z_calibration.git
+install_script: install.sh
 managed_services: klipper
 
 [update_manager led_effect]
