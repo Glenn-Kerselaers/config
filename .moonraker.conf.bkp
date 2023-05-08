@@ -107,11 +107,20 @@ primary_branch = main
 managed_services = sonar
 install_script = tools/install.sh
 
-[update_manager client z_calibration]
+[update_manager mobileraker]
+type = git_repo
+path = ~/mobileraker_companion
+origin = https://github.com/Clon1998/mobileraker_companion.git
+primary_branch = main
+managed_services = mobileraker
+env = ~/mobileraker-env/bin/python
+requirements = scripts/mobileraker-requirements.txt
+install_script = scripts/install-mobileraker-companion.sh
+
+[update_manager z_calibration]
 type = git_repo
 path = ~/klipper_z_calibration
 origin = https://github.com/protoloft/klipper_z_calibration.git
-install_script = install.sh
 managed_services = klipper
 
 [update_manager led_effect]
