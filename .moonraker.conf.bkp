@@ -43,6 +43,8 @@ sudo_password = {secrets.machine_moonraker.password}
 [job_queue]
 load_on_startup = True
 
+[timelapse]
+
 [power printer]
 type = gpio
 pin = gpiochip0/gpio26
@@ -106,6 +108,13 @@ origin = https://github.com/mainsail-crew/sonar.git
 primary_branch = main
 managed_services = sonar
 install_script = tools/install.sh
+
+[update_manager timelapse]
+type = git_repo
+primary_branch = main
+path = ~/moonraker-timelapse
+origin = https://github.com/mainsail-crew/moonraker-timelapse.git
+managed_services = klipper moonraker
 
 [update_manager mobileraker]
 type = git_repo
