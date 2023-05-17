@@ -1,0 +1,5 @@
+[gcode_macro TEST_RESONANCES]
+rename_existing: BASE_TEST_RESONANCES
+description: Runs input shaper test at the center of the bed
+gcode:
+    BASE_TEST_RESONANCES POINT=117,117,20 {rawparams}
