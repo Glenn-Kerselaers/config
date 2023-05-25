@@ -1,41 +1,50 @@
 [server]
 host = 0.0.0.0
 port = 7125
-klippy_uds_address = /home/pi/printer_data/comms/klippy.sock
 max_upload_size = 1024
-
-[file_manager]
-enable_object_processing = True
-queue_gcode_uploads = False
-
-[database]
-
-[data_store]
-temperature_store_size = 1200
-gcode_store_size = 1000
-
-[job_queue]
-load_on_startup = False
+klippy_uds_address = ~/printer_data/comms/klippy.sock
 
 [authorization]
+force_logins = False
+cors_domains = 
+	*.local
+	*.lan
+	*://app.fluidd.xyz
+	*://my.mainsail.xyz
 trusted_clients = 
 	127.0.0.1
 	10.0.88.108
 	10.0.59.153
 	192.168.0.0/24
 	192.168.88.19
-cors_domains = 
-	*.local
-	*.lan
-	*://app.fluidd.xyz
-	*://my.mainsail.xyz
-force_logins = False
+	192.168.0.0/24
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	172.30.0.0/16
+	FE80::/10
+	::1/128
 
-[zeroconf]
+[file_manager]
+enable_object_processing = True
+queue_gcode_uploads = False
+
+[secrets]
 
 [octoprint_compat]
 
 [history]
+
+[zeroconf]
+
+[data_store]
+temperature_store_size = 2400
+gcode_store_size = 2000
+
+[machine]
+sudo_password = {secrets.machine_moonraker.password}
 
 [announcements]
 subscriptions = 
@@ -60,11 +69,12 @@ path = ~/kiauh
 origin = https://github.com/th33xitus/kiauh.git
 is_system_service = False
 
-[update_manager led_effect]
+[update_manager crowsnest]
 type = git_repo
-path = ~/klipper-led_effect
-origin = https://github.com/julianschill/klipper-led_effect.git
-is_system_service = False
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/install.sh
 
 [update_manager sonar]
 type = git_repo
@@ -74,11 +84,21 @@ primary_branch = main
 managed_services = sonar
 install_script = tools/install.sh
 
-[update_manager crowsnest]
+[update_manager mobileraker]
 type = git_repo
-path = ~/crowsnest
-origin = https://github.com/mainsail-crew/crowsnest.git
-install_script = tools/install.sh
+path = ~/mobileraker_companion
+origin = https://github.com/Clon1998/mobileraker_companion.git
+primary_branch = main
+managed_services = mobileraker
+env = ~/mobileraker-env/bin/python
+requirements = scripts/mobileraker-requirements.txt
+install_script = scripts/install-mobileraker-companion.sh
+
+[update_manager led_effect]
+type = git_repo
+path = ~/klipper-led_effect
+origin = https://github.com/julianschill/klipper-led_effect.git
+is_system_service = False
 
 [update_manager octoeverywhere]
 type = git_repo
@@ -91,15 +111,12 @@ install_script = install.sh
 managed_services = 
 	octoeverywhere
 
-[update_manager mobileraker]
+[update_manager voron-klipper-extensions]
 type = git_repo
-path = ~/mobileraker_companion
-origin = https://github.com/Clon1998/mobileraker_companion.git
-primary_branch = main
-managed_services = mobileraker
-env = ~/mobileraker-env/bin/python
-requirements = scripts/mobileraker-requirements.txt
-install_script = scripts/install-mobileraker-companion.sh
+path = ~/voron-klipper-extensions
+origin = https://github.com/voidtrance/voron-klipper-extensions.git
+install_script = install-extensions.sh
+managed_services = klipper
 
 [update_manager mainsail-config]
 type = git_repo
