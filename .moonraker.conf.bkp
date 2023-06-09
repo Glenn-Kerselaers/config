@@ -23,7 +23,6 @@ trusted_clients =
 
 [file_manager]
 enable_object_processing = True
-queue_gcode_uploads = True
 
 [secrets]
 
@@ -40,20 +39,7 @@ gcode_store_size = 2000
 [machine]
 sudo_password = {secrets.machine_moonraker.password}
 
-[job_queue]
-load_on_startup = True
-
 [timelapse]
-
-[power printer]
-type = gpio
-pin = gpiochip0/gpio26
-initial_state = off
-off_when_shutdown = false
-on_when_job_queued = True
-locked_while_printing = True
-restart_klipper_when_powered = False
-bound_services = klipper
 
 [announcements]
 subscriptions = 
