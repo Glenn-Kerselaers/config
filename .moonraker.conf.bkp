@@ -1,3 +1,18 @@
+[update_manager octoeverywhere]
+type = git_repo
+channel = beta
+path = /home/pi/octoeverywhere
+origin = https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git
+env = /home/pi/octoeverywhere-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	octoeverywhere
+
+[announcements]
+subscriptions = 
+	mainsail
+
 [server]
 host = 0.0.0.0
 port = 7125
@@ -46,10 +61,6 @@ gcode_store_size = 2000
 [machine]
 sudo_password = {secrets.machine_moonraker.password}
 
-[announcements]
-subscriptions = 
-	octoeverywhere
-
 [update_manager]
 refresh_interval = 12
 enable_auto_refresh = True
@@ -68,13 +79,6 @@ type = git_repo
 path = ~/kiauh
 origin = https://github.com/th33xitus/kiauh.git
 is_system_service = False
-
-[update_manager crowsnest]
-type = git_repo
-path = ~/crowsnest
-origin = https://github.com/mainsail-crew/crowsnest.git
-managed_services = crowsnest
-install_script = tools/install.sh
 
 [update_manager sonar]
 type = git_repo
@@ -99,37 +103,4 @@ type = git_repo
 path = ~/klipper-led_effect
 origin = https://github.com/julianschill/klipper-led_effect.git
 is_system_service = False
-
-[update_manager octoeverywhere]
-type = git_repo
-channel = beta
-path = /home/pi/octoeverywhere
-origin = https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git
-env = /home/pi/octoeverywhere-env/bin/python
-requirements = requirements.txt
-install_script = install.sh
-managed_services = 
-	octoeverywhere
-
-[update_manager voron-klipper-extensions]
-type = git_repo
-path = ~/voron-klipper-extensions
-origin = https://github.com/voidtrance/voron-klipper-extensions.git
-install_script = install-extensions.sh
-managed_services = klipper
-
-[update_manager mainsail-config]
-type = git_repo
-primary_branch = master
-path = ~/mainsail-config
-origin = https://github.com/mainsail-crew/mainsail-config.git
-managed_services = klipper
-
-[update_manager Klipper-Adaptive-Meshing-Purging]
-type = git_repo
-channel = dev
-path = ~/Klipper-Adaptive-Meshing-Purging
-origin = https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging.git
-managed_services = klipper
-primary_branch = dev
 
